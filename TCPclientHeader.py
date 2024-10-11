@@ -4,7 +4,7 @@ import binascii
 import ctypes
 
 serverIP = '127.0.0.1'
-serverPort = 12345
+serverPort = 54541
 
 clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 clientSocket.connect((serverIP, serverPort))
@@ -30,7 +30,7 @@ def send_and_receive_message(message):
 msg_type1 = 1  # Example message type
 msg_am1 = 12345  # Example AM
 msg_data1 = "Hello, this is a test message."
-msg_length1 = 4 + len(msg_data1)  # 4 bytes for initial data + length of the message data
+msg_length1 = 8 + len(msg_data1)  # 4 bytes for initial data + length of the message data
 
 message_header1 = pack('!HHI', msg_type1, msg_am1, msg_length1)
 message1 = message_header1 + msg_data1.encode('utf-8')
@@ -48,8 +48,8 @@ send_and_receive_message(message1)
 # Message 2: Simple message with type, information type, and some data
 msg_type2 = 2  # Example message type
 info_type = 2  # Example information type
-msg_data2 = "Hello, this is a test message."
-msg_length2 = 4 + len(msg_data2)  # Length of the data part
+msg_data2 = "Test information message."
+msg_length2 = 8 + len(msg_data2)  # Length of the data part
 
 message_header2 = pack('!HHI', msg_type2, info_type, msg_length2)
 message2 = message_header2 + msg_data2.encode('utf-8')
@@ -95,7 +95,7 @@ last_name_padding = (4 - (last_name_length % 4)) % 4
 fathers_name_length = len(fathers_name)
 fathers_name_padding = (4 - (fathers_name_length % 4)) % 4
 
-msg_length3 = (4 + 4 + 
+msg_length3 = (8 + 
               2 + first_name_length + first_name_padding + 
               2 + last_name_length + last_name_padding + 
               2 + fathers_name_length + fathers_name_padding)
@@ -128,7 +128,7 @@ msg_type4 = 4  # Example message type
 msg_am4 = 12345  # Example AM
 phone_number = "123456789012"  # Example phone number (12 digits)
 
-msg_length4 = 4 + 12  # Header length + phone number length
+msg_length4 = 8 + 12  # Header length + phone number length
 
 message_header4 = pack('!HHI', msg_type4, msg_am4, msg_length4)
 phone_number_packed = pack('!12s', phone_number.encode('utf-8'))
@@ -170,7 +170,7 @@ street_padding = (4 - (street_length % 4)) % 4
 city_length = len(city)
 city_padding = (4 - (city_length % 4)) % 4
 
-msg_length5 = (4 + 4 + 
+msg_length5 = (8 + 
               2 + 2 + 
               2 + street_length + street_padding + 
               2 + city_length + city_padding)
